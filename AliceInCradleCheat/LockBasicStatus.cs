@@ -42,7 +42,7 @@ namespace AliceInCradleCheat
             }
         }
         // */
-        [HarmonyPostfix, HarmonyPatch(typeof(SceneGame), "Update")]
+        [HarmonyPostfix, HarmonyPatch(typeof(SceneGame), "runIRD")]
         private static void PatchContent()
         {
             PRNoel noel = MainReference.GetNoel();

@@ -13,12 +13,12 @@ namespace AliceInCradleCheat
     {
         public RestrictionLift ()
         {
-            _ = new EnableFastTravel();
+            //_ = new EnableFastTravel();
             _ = new EnableStorageAccess();
             _ = new EnableItemUsage();
         }
     }
-    public class EnableFastTravel : BasePatchClass
+    /*public class EnableFastTravel : BasePatchClass
     {
         private static ConfigEntry<bool> switch_def;
         public EnableFastTravel()
@@ -38,21 +38,21 @@ namespace AliceInCradleCheat
         }
         //
         // Enable switch between map edit and travel
-        [HarmonyPrefix, HarmonyPatch(typeof(UiGameMenu), "runEditMap")]
+        [HarmonyPrefix, HarmonyPatch(typeof(UiGameMenu), "activate")]
         private static void MapTravelPatch(ref UiGameMenu __instance)
         {
             if (!switch_def.Value) { return; }
             Traverse.Create(__instance).Field("can_use_fasttravel").SetValue(true);
         }
         // Enable travel, without check box ui (runEditMap use BxCmd.addButtonMultiT)
-        [HarmonyPostfix, HarmonyPatch(typeof(UiGameMenu), "runEditMap")]
+        [HarmonyPostfix, HarmonyPatch(typeof(UiGameMenu), "activate")]
         private static void MapTravelPatch2(ref UiGameMenu __instance)
         {
             if (!switch_def.Value) { return; }
             ButtonSkinWholeMapArea WmSkin = Traverse.Create(__instance).Field("WmSkin").GetValue<ButtonSkinWholeMapArea>();
             if (IN.isRunO(0)
                 || !IN.kettei()
-                || !Traverse.Create(__instance).Field("fasttravel").GetValue<bool>()
+                || !Traverse.Create(__instance).Field("can_use_fasttravel").GetValue<bool>()
                 || WmSkin.FastTravelFocused.Equals(null))
             {
                 return;
@@ -68,11 +68,10 @@ namespace AliceInCradleCheat
         private static void MapTravelPatch3(ref UiGameMenu __instance)
         {
             if (!switch_def.Value) { return; }
-            Traverse.Create(__instance).Field("fasttravel").SetValue(true);
+            Traverse.Create(__instance).Field("can_use_fasttravel").SetValue(true);
             Traverse.Create(__instance).Field("WmSkin").GetValue<ButtonSkinWholeMapArea>().fast_travel_active = true;
         }
-        // */
-    }
+    }*/
     public class EnableStorageAccess : BasePatchClass
     {
         private static ConfigEntry<bool> switch_def;

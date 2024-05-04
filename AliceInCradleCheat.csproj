@@ -4,7 +4,7 @@
     <TargetFramework>net46</TargetFramework>
     <AssemblyName>AliceInCradleCheat</AssemblyName>
     <Description>Cheat for AliceInCradle</Description>
-    <Version>0.24.2</Version>
+    <Version>0.25.0</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>

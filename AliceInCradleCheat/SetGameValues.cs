@@ -40,7 +40,7 @@ namespace AliceInCradleCheat
             lay_eggs = new(TrackBindConfig("PervertFunctions", "LayEggs", false));
             TryPatch(GetType());
         }
-        [HarmonyPostfix, HarmonyPatch(typeof(SceneGame), "Update")]
+        [HarmonyPostfix, HarmonyPatch(typeof(SceneGame), "runIRD")]
         private static void PatchContent()
         {
             m2d = MainReference.GetM2D();
