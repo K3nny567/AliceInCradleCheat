@@ -12,15 +12,15 @@ namespace AliceInCradleCheat
     {
         public List<ConfigDefinition> config_list = new();
         public ConfigEntry<T> TrackBindConfig<T>(string section, string key, T val,
-            AcceptableValueBase acp_value = null, bool show_percent = false)
+            AcceptableValueBase acp_value = null, bool hide_defaultbutton = false, bool show_percent = false)
         {
             // add config with simple description
-            ConfigEntry<T> entry = BindConfig(section, key, val, acp_value, show_percent);
+            ConfigEntry<T> entry = BindConfig(section, key, val, acp_value, hide_defaultbutton, show_percent);
             config_list.Add(entry.Definition);
             return entry;
         }
         public static ConfigEntry<T> BindConfig<T>(string section, string key, T val, 
-            AcceptableValueBase acp_value = null, bool show_percent = false)
+            AcceptableValueBase acp_value = null, bool hide_defaultbutton = false, bool show_percent = false)
         {
             // add config with simple description
             ConfigDefinition config_def = new(section, key);
@@ -30,7 +30,7 @@ namespace AliceInCradleCheat
                     DispName = LocNames.GetEntryLocName(section, key),
                     Category = LocNames.GetSectionLocName(section),
                     Order = LocNames.GetEntryOrder(section, key),
-                    HideDefaultButton = false,
+                    HideDefaultButton = hide_defaultbutton,
                     ShowRangeAsPercent = show_percent,
                 });
             return AICCheat.config.Bind(config_def, val, config_desc);

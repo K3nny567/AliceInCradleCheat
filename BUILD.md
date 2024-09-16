@@ -8,7 +8,7 @@ Note: path to the project folder should not contain any non-ASCII characters.
 
 ### Obtaining dependencies
 
-Install `Alice In Cradle v0.24`: download and unpack released package, then copy `Assembly-CSharp.dll`, `better.dll`, `netstandard.dll`, `UnityEngine.CoreModule.dll`, `UnityEngine.dll`, `UnityEngine.UI.dll` and `unsafeAssem.dll` to the lib folder from the `AliceInCradle_Data\Managed` folder.
+Install `Alice In Cradle v0.26`: download and unpack released package, then copy `Assembly-CSharp.dll`, `better.dll`, `netstandard.dll`, `UnityEngine.CoreModule.dll`, `UnityEngine.dll`, `UnityEngine.UI.dll` and `unsafeAssem.dll` to the lib folder from the `AliceInCradle_Data\Managed` folder.
 
 ### Building Binaries
 

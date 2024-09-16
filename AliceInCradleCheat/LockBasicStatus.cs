@@ -9,39 +9,24 @@ namespace AliceInCradleCheat
     // ##############################
     public class LockStatus : BasePatchClass
     {
-        private static ConfigEntry<bool> basic_switch_def;
+        private static ConfigEntry<bool> hp_switch_def;
         private static ConfigEntry<int> hp_def;
-        private static ConfigEntry<bool> basic2_switch_def;
+        private static ConfigEntry<bool> mp_switch_def;
         private static ConfigEntry<int> mp_def;
-        private static ConfigEntry<bool> ar_switch_def;
+        private static ConfigEntry<bool> ep_switch_def;
         private static ConfigEntry<int> ep_def;
         public LockStatus()
         {
             string section = "BasicStatus";
-            basic_switch_def = TrackBindConfig(section, "LockSwitch", false);
-            //basic_switch_def.Value = false;
-            hp_def = TrackBindConfig(section, "HP", 100, new AcceptableValueRange<int>(0, 100), true);
-            basic2_switch_def = TrackBindConfig(section, "LockSwitch2", false);
-            mp_def = TrackBindConfig(section, "MP", 100, new AcceptableValueRange<int>(0, 100), true);
+            hp_switch_def = TrackBindConfig(section, "HPLockSwitch", false);
+            hp_def = TrackBindConfig(section, "HP", 100, new AcceptableValueRange<int>(0, 100), false, true);
+            mp_switch_def = TrackBindConfig(section, "MPLockSwitch", false);
+            mp_def = TrackBindConfig(section, "MP", 100, new AcceptableValueRange<int>(0, 100), false, true);
             section = "PervertFunctions";
-            ar_switch_def = TrackBindConfig(section, "EPLockSwitch", false);
-            //ar_switch_def.Value = false;
+            ep_switch_def = TrackBindConfig(section, "EPLockSwitch", false);
             ep_def = TrackBindConfig(section, "EP", 0, new AcceptableValueRange<int>(0, 1000));
             TryPatch(GetType());
         }
-        /*
-        [HarmonyPostfix, HarmonyPatch(typeof(COOK), "initGameScene")]
-        private static void FetchMaxiumStatus()
-        {
-            PRNoel noel = MainReference.GetNoel();
-            if (noel != null)
-            {
-                hp_def.Value = (int)noel.get_maxhp();
-                mp_def.Value = (int)noel.get_maxmp();
-                ep_def.Value = 0;
-            }
-        }
-        // */
         [HarmonyPostfix, HarmonyPatch(typeof(SceneGame), "runIRD")]
         private static void PatchContent()
         {
@@ -50,7 +35,7 @@ namespace AliceInCradleCheat
             {
                 return;
             }
-            if (basic_switch_def.Value)
+            if (hp_switch_def.Value)
             {
                 int max_hp = (int)noel.get_maxhp();
                 int set_hp = hp_def.Value * max_hp / 100;
@@ -60,7 +45,7 @@ namespace AliceInCradleCheat
                     UIStatus.Instance.fineHpRatio(true, false);
                 }
             }
-            if (basic2_switch_def.Value)
+            if (mp_switch_def.Value)
             {
                 int max_mp = (int)noel.get_maxmp();
                 int set_mp = mp_def.Value * max_mp / 100;
@@ -72,7 +57,7 @@ namespace AliceInCradleCheat
                     UIStatus.Instance.fineMpRatio(true, false);
                 }
             }
-            if (ar_switch_def.Value)
+            if (ep_switch_def.Value)
             {
                 noel.ep = ep_def.Value;
                 noel.EpCon.fineCounter();
